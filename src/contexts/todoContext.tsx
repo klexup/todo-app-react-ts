@@ -1,13 +1,16 @@
 import { createContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-export const TodoContext = createContext();
-
-function filterTodos(todos, sortOption, tagFilter, searchInput) {
+function filterTodos(
+  todos: Todo[],
+  sortOption: SortOption,
+  tagFilter: string,
+  searchInput: string,
+) {
   const todosCopy = todos
-    .filter((value) => value.taskName.includes(searchInput))
-    .filter((value) => {
-      if (tagFilter === null) return value;
+    .filter((value: Todo) => value.taskName.includes(searchInput))
+    .filter((value: Todo) => {
+      if (tagFilter === "") return value;
       return value.tags.includes(tagFilter);
     });
 
@@ -64,45 +67,45 @@ function filterTodos(todos, sortOption, tagFilter, searchInput) {
       });
     case "ascending-date":
       return todosCopy.sort(
-        (a, b) => new Date(a.dueDate) - new Date(b.dueDate),
+        (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(),
       );
     case "descending-date":
-      return todosCopy.sort((a, b) => {
-        return new Date(b.dueDate) - new Date(a.dueDate);
-      });
+      return todosCopy.sort(
+        (a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime(),
+      );
 
     default:
       return todos;
   }
 }
 
-export default function TodoProvider({ children }) {
-  const storageName = "todos";
-  const [todos, setTodos] = useLocalStorage(storageName);
-
+export default function TodoProvider({ children }: any) {
+  const [todos, setTodos] = useLocalStorage("todos");
   const [searchInput, setSearchInput] = useState("");
-  const [tagFilter, setTagFilter] = useState(null);
-  const [sortOption, setSortOption] = useState("default");
+  const [tagFilter, setTagFilter] = useState<string>("");
+  const [sortOption, setSortOption] = useState<SortOption>("default");
 
-  const allCurrentTags = [...new Set(todos.flatMap((value) => value.tags))];
+  const allCurrentTags = [
+    ...new Set(todos.flatMap((value: Todo) => value.tags)),
+  ] as string[];
 
-  const handleSubmitNewTask = (newTodo) => {
-    setTodos((prev) => {
+  const handleSubmitNewTask = (newTodo: Todo) => {
+    setTodos((prev: Todo[]) => {
       return [...prev, newTodo];
     });
   };
 
-  const handleUpdateTask = (updatedTodo) => {
-    setTodos((prev) => {
-      return prev.map((todo) =>
+  const handleUpdateTask = (updatedTodo: Todo) => {
+    setTodos((prev: Todo[]) => {
+      return prev.map((todo: Todo) =>
         todo.id === updatedTodo.id ? updatedTodo : todo,
       );
     });
   };
 
-  const toggleCompleted = (id) => {
+  const toggleCompleted = (id: string) => {
     setTodos(() => {
-      return todos.map((value) => {
+      return todos.map((value: Todo) => {
         if (value.id === id) {
           return { ...value, completed: !value.completed };
         }
@@ -111,9 +114,9 @@ export default function TodoProvider({ children }) {
     });
   };
 
-  const handleDeleteTask = (id) => {
+  const handleDeleteTask = (id: string) => {
     setTodos(() => {
-      return todos.filter((value) => value.id !== id);
+      return todos.filter((value: Todo) => value.id !== id);
     });
   };
 
@@ -142,3 +145,19 @@ export default function TodoProvider({ children }) {
     </>
   );
 }
+
+export const TodoContext = createContext<TodoContextType>({
+  todos: [],
+  handleSubmitNewTask: () => {},
+  handleUpdateTask: () => {},
+  toggleCompleted: () => {},
+  handleDeleteTask: () => {},
+  sortOption: "default",
+  setSortOption: () => {},
+  tagFilter: "",
+  setTagFilter: () => {},
+  searchInput: "",
+  setSearchInput: () => {},
+  allCurrentTags: [],
+  filterTodos: () => [],
+});

@@ -1,4 +1,3 @@
-import React from "react";
 import ProgressRing from "./ProgressRing";
 
 export default function ViewPageTodo({ value }) {

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-export default function useLocalStorage(storageName) {
+export default function useLocalStorage(storageName: string) {
   const [todos, setTodos] = useState(() => {
-    const array =
-      localStorage.getItem(storageName) === null
-        ? []
-        : JSON.parse(localStorage.getItem(storageName));
-    return array;
+    const storedData = localStorage.getItem(storageName);
+    if (storedData === null) {
+      localStorage.setItem(storageName, JSON.stringify([]));
+      return [];
+    } else return JSON.parse(storedData);
   });
 
   useEffect(() => {
     localStorage.setItem(storageName, JSON.stringify(todos));
-  }, [todos]);
+  }, [todos, storageName]);
 
   return [todos, setTodos];
 }

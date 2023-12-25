@@ -8,8 +8,8 @@ import Todo from "../components/Todo";
 export default function MainPage() {
   const {
     toggleCompleted,
-    filter,
-    setFilter,
+    sortOption,
+    setSortOption,
     tagFilter,
     setTagFilter,
     searchInput,
@@ -17,10 +17,10 @@ export default function MainPage() {
     allCurrentTags,
     filterTodos,
     todos,
-  } = useContext(TodoContext);
+  } = useContext<TodoContextType>(TodoContext);
 
   const [searchFocused, setSearchFocused] = useState(false);
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -29,7 +29,9 @@ export default function MainPage() {
           searchFocused ? "border-1 border-BLK" : "border-1 border-STROKE"
         }`}
         onClick={() => {
-          searchRef.current.focus();
+          if (searchRef.current) {
+            searchRef.current.focus();
+          }
         }}
       >
         <div className="flex justify-start">
@@ -102,7 +104,7 @@ export default function MainPage() {
         </svg>
       </div>
       <div className="mb-5 flex w-[398px] justify-between">
-        <SortDropdown setFilter={setFilter} filter={filter} />
+        <SortDropdown setSortOption={setSortOption} sortOption={sortOption} />
         <CategoryDropdown
           allCurrentTags={allCurrentTags}
           setTagFilter={setTagFilter}
@@ -110,15 +112,17 @@ export default function MainPage() {
         />
       </div>
       <div className="mb-5">
-        {filterTodos(todos, filter, tagFilter, searchInput).map((value) => {
-          return (
-            <Todo
-              key={value.id}
-              value={value}
-              toggleCompleted={toggleCompleted}
-            />
-          );
-        })}
+        {filterTodos(todos, sortOption, tagFilter, searchInput).map(
+          (value: Todo) => {
+            return (
+              <Todo
+                key={value.id}
+                value={value}
+                toggleCompleted={toggleCompleted}
+              />
+            );
+          },
+        )}
       </div>
 
       <Link

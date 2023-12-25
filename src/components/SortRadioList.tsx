@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function SortRadioList({ setFilter, filter }) {
+export default function SortRadioList({ setSortOption, sortOption }) {
   const [sortValue, setSortValue] = useState("default");
 
   return (
@@ -11,52 +11,52 @@ export default function SortRadioList({ setFilter, filter }) {
       <RadioListItem
         label="Default"
         value="default"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <RadioListItem
         label="Ascending Date"
         value="ascending-date"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <RadioListItem
         label="Descending Date"
         value="descending-date"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <RadioListItem
         label="Ascending Complexity"
         value="ascending-complexity"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <RadioListItem
         label="Descending Complexity"
         value="descending-complexity"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <RadioListItem
         label="Ascending Priority"
         value="ascending-priority"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <RadioListItem
         label="Descending Priority"
         value="descending-priority"
-        filter={filter}
-        setFilter={setFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
     </div>
   );
 }
 
-function RadioListItem({ label, value, filter, setFilter }) {
+function RadioListItem({ label, value, sortOption, setSortOption }) {
   const handleChange = () => {
-    setFilter(value);
+    setSortOption(value);
   };
 
   return (
@@ -69,7 +69,7 @@ function RadioListItem({ label, value, filter, setFilter }) {
         type="radio"
         name="sortFilter"
         value={value}
-        checked={filter === value}
+        checked={sortOption === value}
         onChange={handleChange}
       />
     </div>

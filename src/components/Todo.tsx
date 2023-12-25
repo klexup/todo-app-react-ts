@@ -1,4 +1,3 @@
-import React from "react";
 import ProgressRing from "./ProgressRing";
 import { useNavigate } from "react-router-dom";
 

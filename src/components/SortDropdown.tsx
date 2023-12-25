@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SortRadioList from "./SortRadioList";
 
-export default function SortDropdown({ setFilter, filter }) {
+export default function SortDropdown({ setSortOption, sortOption }) {
   const [isActive, setIsActive] = useState(false);
   return (
     <div
@@ -29,7 +29,10 @@ export default function SortDropdown({ setFilter, filter }) {
               />
             </svg>
             <div className="absolute left-1/2 top-10 z-10 w-[184px] -translate-x-1/2 rounded-xl bg-WH shadow-md">
-              <SortRadioList setFilter={setFilter} filter={filter} />
+              <SortRadioList
+                setSortOption={setSortOption}
+                sortOption={sortOption}
+              />
             </div>
           </div>
         </>

@@ -34,7 +34,7 @@ export default function SortCategoryList({
 function CategoryListItem({ label, value, tagFilter, setTagFilter }) {
   const handleChange = () => {
     if (tagFilter === value) {
-      setTagFilter(null);
+      setTagFilter("");
       return;
     }
     setTagFilter(value);
