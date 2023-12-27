@@ -1,7 +1,12 @@
 import ProgressRing from "./ProgressRing";
 import { useNavigate } from "react-router-dom";
 
-export default function Todo({ value, toggleCompleted }) {
+interface TodoProps {
+  value: Todo;
+  toggleCompleted: (id: string) => void;
+}
+
+export default function Todo({ value, toggleCompleted }: TodoProps) {
   const {
     taskName,
     priorityLevel,

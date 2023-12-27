@@ -1,9 +1,17 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-export default function TaskInput({ taskName, setCurrentTodo }) {
+interface TaskInputProps {
+  taskName: string;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function TaskInput({
+  taskName,
+  setCurrentTodo,
+}: TaskInputProps) {
   const [taskNameInputFocused, setTaskNameInputFocused] = useState(false);
-  const taskNameRef = useRef();
-  const handleChange = (value) => {
+  const taskNameRef = useRef<HTMLInputElement>(null);
+  const handleChange = (value: string) => {
     setCurrentTodo((prev) => {
       return { ...prev, taskName: value };
     });
@@ -19,7 +27,7 @@ export default function TaskInput({ taskName, setCurrentTodo }) {
             : "border-1 border-STROKE"
         }`}
         onClick={() => {
-          taskNameRef.current.focus();
+          if (taskNameRef.current) taskNameRef.current.focus();
         }}
       >
         <input

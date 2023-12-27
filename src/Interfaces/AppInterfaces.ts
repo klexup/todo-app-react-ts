@@ -34,6 +34,7 @@ interface Todo {
   priorityLevel: number;
   complexityLevel: number;
   dueDate: string;
+  dueTime: string;
   subTasks: SubTask[];
   tags: string[];
   completed: boolean;

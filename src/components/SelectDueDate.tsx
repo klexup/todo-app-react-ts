@@ -1,5 +1,13 @@
-export default function SelectDueDate({ dueDate, setCurrentTodo }) {
-  const handleChange = (value) => {
+interface SelectDueDate {
+  dueDate: string;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function SelectDueDate({
+  dueDate,
+  setCurrentTodo,
+}: SelectDueDate) {
+  const handleChange = (value: string) => {
     setCurrentTodo((prev) => {
       return { ...prev, dueDate: value };
     });

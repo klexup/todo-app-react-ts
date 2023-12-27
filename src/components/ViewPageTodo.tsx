@@ -1,6 +1,6 @@
 import ProgressRing from "./ProgressRing";
 
-export default function ViewPageTodo({ value }) {
+export default function ViewPageTodo(props: any) {
   const {
     taskName,
     priorityLevel,
@@ -9,7 +9,7 @@ export default function ViewPageTodo({ value }) {
     dueTime,
     subTasks,
     completed,
-  } = value;
+  } = props.value;
 
   const getPriorityColor = () => {
     if (priorityLevel <= 3) {
@@ -50,24 +50,10 @@ export default function ViewPageTodo({ value }) {
     }
   };
 
-  const tagColors = [
-    "bg-yellow-200",
-    "bg-pink-200",
-    "bg-slate-200",
-    "bg-green-200",
-    "bg-purple-200",
-    "bg-sky-200",
-    "bg-indigo-200",
-    "bg-fuchsia-200",
-    "bg-rose-200",
-    "bg-teal-200",
-    "bg-amber-200",
-  ];
-
   const calculatePercentageComplete = () => {
     const totalSubtasks = subTasks.length;
     let subtasksComplete = 0;
-    subTasks.forEach((value) => {
+    subTasks.forEach((value: SubTask) => {
       if (value.subtaskCompleted) {
         subtasksComplete += 1;
       }

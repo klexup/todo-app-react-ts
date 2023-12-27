@@ -1,10 +1,14 @@
-import React from "react";
+interface SortCategoryListProps {
+  setTagFilter: React.Dispatch<React.SetStateAction<string>>;
+  tagFilter: string;
+  allCurrentTags: any[];
+}
 
 export default function SortCategoryList({
   allCurrentTags,
   setTagFilter,
   tagFilter,
-}) {
+}: SortCategoryListProps) {
   return (
     <>
       <div
@@ -31,7 +35,19 @@ export default function SortCategoryList({
   );
 }
 
-function CategoryListItem({ label, value, tagFilter, setTagFilter }) {
+interface CategoryListItemProps {
+  label: string;
+  value: string;
+  tagFilter: string;
+  setTagFilter: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function CategoryListItem({
+  label,
+  value,
+  tagFilter,
+  setTagFilter,
+}: CategoryListItemProps) {
   const handleChange = () => {
     if (tagFilter === value) {
       setTagFilter("");

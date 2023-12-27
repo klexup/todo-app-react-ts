@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SortCategoryList from "./SortCategoryList";
+import { TodoContext } from "../contexts/todoContext";
 
-export default function CategoryDropdown({
-  allCurrentTags,
-  setTagFilter,
-  tagFilter,
-}) {
+export default function CategoryDropdown() {
+  const { tagFilter, setTagFilter, allCurrentTags } =
+    useContext<TodoContextType>(TodoContext);
+
   const [isActive, setIsActive] = useState(false);
   return (
     <div

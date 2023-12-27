@@ -1,14 +1,21 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
+
+interface SubtaskNewTodoPageProps {
+  index: number;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+  subTasks: SubTask[];
+  currentTodo: Todo;
+}
 
 export default function SubtaskNewTodoPage({
   index,
   setCurrentTodo,
   subTasks,
   currentTodo,
-}) {
-  const subtaskInputRef = useRef();
+}: SubtaskNewTodoPageProps) {
+  const subtaskInputRef = useRef<HTMLInputElement>(null);
   const [subtaskInputFocused, setSubtaskInputFocused] = useState(false);
-  const handleChange = (newValue) => {
+  const handleChange = (newValue: string) => {
     setCurrentTodo(() => {
       const updatedSubTasks = [...subTasks];
       updatedSubTasks[index] = {
@@ -42,7 +49,7 @@ export default function SubtaskNewTodoPage({
           subtaskInputFocused ? "border-1 border-BLK" : "border-1 border-STROKE"
         }`}
         onClick={() => {
-          subtaskInputRef.current.focus();
+          if (subtaskInputRef.current) subtaskInputRef.current.focus();
         }}
       >
         <input

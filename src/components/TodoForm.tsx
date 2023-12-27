@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import TaskInput from "./TaskInput";
 import SelectPriorityLevel from "./SelectPriorityLevel";
@@ -9,7 +8,17 @@ import SubtaskInput from "./SubtaskInput";
 import CurrentSubtasksList from "./CurrentSubtasksList";
 import TagsInput from "./TagsInput";
 
-export default function TodoForm({ title, currentTodo, setCurrentTodo }) {
+interface TodoFormProps {
+  title: string;
+  currentTodo: Todo;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function TodoForm({
+  title,
+  currentTodo,
+  setCurrentTodo,
+}: TodoFormProps) {
   return (
     <>
       <div className="relative mb-10 flex w-full items-center justify-center">

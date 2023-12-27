@@ -9,12 +9,8 @@ export default function EditTodoPage() {
   const { todoId } = useParams();
 
   const [currentTodo, setCurrentTodo] = useState(() => {
-    const foundTodo = todos.find((todo) => {
-      if (todo.id === todoId) {
-        return todo;
-      }
-    });
-    return foundTodo;
+    const foundTodo = todos.find((todo) => todo.id === todoId);
+    return foundTodo!;
   });
 
   return (
@@ -29,7 +25,9 @@ export default function EditTodoPage() {
           to={"/"}
           className="mt-5 flex h-[60px] w-[192px] cursor-pointer items-center justify-center self-center rounded-full bg-PRIMARY text-PRIMARYBUTTON text-WH transition-all hover:scale-110"
           onClick={() => {
-            handleUpdateTask(currentTodo);
+            if (currentTodo !== undefined) {
+              handleUpdateTask(currentTodo);
+            }
           }}
         >
           Save Task

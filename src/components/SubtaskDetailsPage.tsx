@@ -1,12 +1,19 @@
 import { useContext } from "react";
 import { TodoContext } from "../contexts/todoContext";
 
+interface SubtaskDetailsPageProps {
+  index: number;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+  subTasks: SubTask[];
+  currentTodo: Todo;
+}
+
 export default function SubtaskDetailsPage({
   index,
   setCurrentTodo,
   subTasks,
   currentTodo,
-}) {
+}: SubtaskDetailsPageProps) {
   const { handleUpdateTask } = useContext(TodoContext);
 
   const handleToggleComplete = () => {

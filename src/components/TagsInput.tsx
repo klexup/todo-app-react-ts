@@ -1,9 +1,14 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-export default function TagsInput({ tags, setCurrentTodo }) {
+interface TagsInputProps {
+  tags: string[];
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function TagsInput({ tags, setCurrentTodo }: TagsInputProps) {
   const [tagsInputFocused, setTagsInputFocused] = useState(false);
-  const tagsRef = useRef();
-  const handleChange = (value) => {
+  const tagsRef = useRef<HTMLInputElement>(null);
+  const handleChange = (value: string) => {
     setCurrentTodo((prev) => {
       return { ...prev, tags: value.split(",") };
     });
@@ -17,7 +22,7 @@ export default function TagsInput({ tags, setCurrentTodo }) {
             tagsInputFocused ? "border-1 border-BLK" : "border-1 border-STROKE"
           }`}
           onClick={() => {
-            tagsRef.current.focus();
+            if (tagsRef.current) tagsRef.current.focus();
           }}
         >
           <input

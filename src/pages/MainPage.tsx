@@ -9,12 +9,9 @@ export default function MainPage() {
   const {
     toggleCompleted,
     sortOption,
-    setSortOption,
     tagFilter,
-    setTagFilter,
     searchInput,
     setSearchInput,
-    allCurrentTags,
     filterTodos,
     todos,
   } = useContext<TodoContextType>(TodoContext);
@@ -104,12 +101,8 @@ export default function MainPage() {
         </svg>
       </div>
       <div className="mb-5 flex w-[398px] justify-between">
-        <SortDropdown setSortOption={setSortOption} sortOption={sortOption} />
-        <CategoryDropdown
-          allCurrentTags={allCurrentTags}
-          setTagFilter={setTagFilter}
-          tagFilter={tagFilter}
-        />
+        <SortDropdown />
+        <CategoryDropdown />
       </div>
       <div className="mb-5">
         {filterTodos(todos, sortOption, tagFilter, searchInput).map(

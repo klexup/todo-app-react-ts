@@ -1,5 +1,13 @@
-export default function SelectTime({ dueTime, setCurrentTodo }) {
-  const handleChange = (value) => {
+interface SelectTimeProps {
+  dueTime: string;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function SelectTime({
+  dueTime,
+  setCurrentTodo,
+}: SelectTimeProps) {
+  const handleChange = (value: string) => {
     setCurrentTodo((prev) => {
       return { ...prev, dueTime: value };
     });

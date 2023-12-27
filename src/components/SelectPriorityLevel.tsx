@@ -1,4 +1,12 @@
-export default function SelectPriorityLevel({ priorityLevel, setCurrentTodo }) {
+interface SelectPriorityLevelProps {
+  priorityLevel: number;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function SelectPriorityLevel({
+  priorityLevel,
+  setCurrentTodo,
+}: SelectPriorityLevelProps) {
   const prioItemProps = { priorityLevel, setCurrentTodo };
   const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
@@ -19,7 +27,17 @@ export default function SelectPriorityLevel({ priorityLevel, setCurrentTodo }) {
   );
 }
 
-function PriorityLevelItem({ priorityValue, priorityLevel, setCurrentTodo }) {
+interface PriorityLevelItemProps {
+  priorityValue: number;
+  priorityLevel: number;
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+function PriorityLevelItem({
+  priorityValue,
+  priorityLevel,
+  setCurrentTodo,
+}: PriorityLevelItemProps) {
   const handleClick = () => {
     if (priorityValue === priorityLevel) {
       setCurrentTodo((prev) => {

@@ -6,14 +6,14 @@ import TodoForm from "../components/TodoForm";
 export default function NewTodoPage() {
   const { handleSubmitNewTask } = useContext(TodoContext);
 
-  const [currentTodo, setCurrentTodo] = useState({
+  const [currentTodo, setCurrentTodo] = useState<Todo>({
     id: crypto.randomUUID(),
     completed: false,
     taskName: "",
     priorityLevel: 0,
     complexityLevel: 0,
-    dueDate: null,
-    dueTime: null,
+    dueDate: "",
+    dueTime: "",
     subTasks: [],
     tags: [],
   });

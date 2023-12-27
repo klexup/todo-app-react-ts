@@ -1,7 +1,15 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export default function ProgressRing({ percentage, priorityLevel }) {
+interface ProgressRing {
+  percentage: number;
+  priorityLevel: number;
+}
+
+export default function ProgressRing({
+  percentage,
+  priorityLevel,
+}: ProgressRing) {
   const getPriorityColor = () => {
     if (priorityLevel <= 3) {
       return "#0d99ff";

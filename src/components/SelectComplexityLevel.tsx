@@ -1,7 +1,12 @@
+interface SelectComplexityLevelProps {
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+  complexityLevel: number;
+}
+
 export default function SelectComplexityLevel({
   complexityLevel,
   setCurrentTodo,
-}) {
+}: SelectComplexityLevelProps) {
   const complexityItemProps = { complexityLevel, setCurrentTodo };
   const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
@@ -22,11 +27,17 @@ export default function SelectComplexityLevel({
   );
 }
 
+interface ComplexityLevelItemProps {
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+  complexityValue: number;
+  complexityLevel: number;
+}
+
 function ComplexityLevelItem({
   complexityValue,
   complexityLevel,
   setCurrentTodo,
-}) {
+}: ComplexityLevelItemProps) {
   const handleClick = () => {
     if (complexityLevel === complexityValue) {
       setCurrentTodo((prev) => {

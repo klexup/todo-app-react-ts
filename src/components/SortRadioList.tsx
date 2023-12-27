@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+interface SortRadioListProps {
+  sortOption: SortOption;
+  setSortOption: React.Dispatch<React.SetStateAction<SortOption>>;
+}
 
-export default function SortRadioList({ setSortOption, sortOption }) {
-  const [sortValue, setSortValue] = useState("default");
-
+export default function SortRadioList({
+  setSortOption,
+  sortOption,
+}: SortRadioListProps) {
   return (
     <div
       className="flex flex-col gap-2 p-3 text-RADIOTEXT"
@@ -54,7 +58,19 @@ export default function SortRadioList({ setSortOption, sortOption }) {
   );
 }
 
-function RadioListItem({ label, value, sortOption, setSortOption }) {
+interface RadioListItemProps {
+  label: string;
+  value: SortOption;
+  sortOption: SortOption;
+  setSortOption: React.Dispatch<React.SetStateAction<SortOption>>;
+}
+
+function RadioListItem({
+  label,
+  value,
+  sortOption,
+  setSortOption,
+}: RadioListItemProps) {
   const handleChange = () => {
     setSortOption(value);
   };

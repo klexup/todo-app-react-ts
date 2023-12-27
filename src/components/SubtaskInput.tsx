@@ -1,30 +1,40 @@
-import React, { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
-export default function SubtaskInput({ subTasks, setCurrentTodo }) {
+interface SubtaskInputProps {
+  subTasks: SubTask[];
+  setCurrentTodo: React.Dispatch<React.SetStateAction<Todo>>;
+}
+
+export default function SubtaskInput({
+  subTasks,
+  setCurrentTodo,
+}: SubtaskInputProps) {
   const [subtaskNameInputFocused, setSubtaskNameInputFocused] = useState(false);
-  const subtaskNameRef = useRef();
+  const subtaskNameRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    let value = {
-      subtaskName: subtaskNameRef.current.value.trim(),
-      subtaskId: crypto.randomUUID(),
-      subtaskCompleted: false,
-    };
+    if (subtaskNameRef.current) {
+      let value = {
+        subtaskName: subtaskNameRef.current.value.trim(),
+        subtaskId: crypto.randomUUID(),
+        subtaskCompleted: false,
+      };
 
-    if (
-      value.subtaskName.length < 1 ||
-      subTasks.some((subtask) => subtask.subtaskName === value.subtaskName)
-    ) {
+      if (
+        value.subtaskName.length < 1 ||
+        subTasks.some((subtask) => subtask.subtaskName === value.subtaskName)
+      ) {
+        subtaskNameRef.current.value = "";
+        return;
+      }
+
+      let newSubtaskList = [...subTasks, value];
+      setCurrentTodo((prev) => {
+        return { ...prev, subTasks: newSubtaskList };
+      });
       subtaskNameRef.current.value = "";
-      return;
     }
-
-    let newSubtaskList = [...subTasks, value];
-    setCurrentTodo((prev) => {
-      return { ...prev, subTasks: newSubtaskList };
-    });
-    subtaskNameRef.current.value = "";
   };
 
   return (
@@ -39,7 +49,7 @@ export default function SubtaskInput({ subTasks, setCurrentTodo }) {
               : "border-1 border-STROKE"
           }`}
           onClick={() => {
-            subtaskNameRef.current.focus();
+            if (subtaskNameRef.current) subtaskNameRef.current.focus();
           }}
         >
           <input

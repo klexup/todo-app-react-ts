@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SortRadioList from "./SortRadioList";
+import { TodoContext } from "../contexts/todoContext";
 
-export default function SortDropdown({ setSortOption, sortOption }) {
+export default function SortDropdown() {
+  const { sortOption, setSortOption } =
+    useContext<TodoContextType>(TodoContext);
   const [isActive, setIsActive] = useState(false);
   return (
     <div
