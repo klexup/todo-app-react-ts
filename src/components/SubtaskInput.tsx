@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 interface SubtaskInputProps {
   subTasks: SubTask[];
@@ -12,7 +12,7 @@ export default function SubtaskInput({
   const [subtaskNameInputFocused, setSubtaskNameInputFocused] = useState(false);
   const subtaskNameRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (subtaskNameRef.current) {
       let value = {
